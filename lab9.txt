@@ -1,0 +1,53 @@
+CMPUT 404 Wi21
+Lab 9
+Hugh Bagan
+https://github.com/hughbagan/authentication-lab
+
+
+Question 1
+----------
+It uses the django superuser admins, taken wholesale it seems.
+
+
+Question 2
+----------
+Username and password, basic HTTP auth by default.
+
+
+Question 3
+----------
+Session based authentication - the server creates a session for the user
+when they log in. The session id is stored on a cookie in the user's 
+browser. 
+Token based authentication (JSON Web Token) - the server creates JWT instead
+of sessions. The JWT has a secret and is sent to the client. The client 
+stores the JWT locally and includes it in headers.
+The difference is that Token based auth stores the user's state in the token
+on the client instead of on the server. 
+Token authentication is great because the client doesn't need to save any
+credentials anywhere (like in Basic authentication).
+
+
+Question 4
+----------
+1. The user is given an authorization code link. Basically it links to an
+   API authorization endpoint. It also contains the application's client ID,
+   a redirect url, and the level of requested access. 
+2. The user clicks the link and logs into the service (eg. Google). Then
+   the service will prompt to authorize or deny the access to their account.
+3. When the user clicks "authorize", the service redirects them along with an
+   authorization code.
+4. Then the application requests an access token from the API using that 
+   authorization code. It also includes the "client secret" to the API
+   token endpoint.
+5. If the authorization is good, the API will send the access token to the 
+   application in a response. 
+6. The application is authorized :)
+   The token can be used to access the user's account via the service API.
+   It's limited to the granted level of access. Eventually the token expires
+   or can be revoked. 
+
+Apparently these steps are only one kind of third-party service authorization
+type.
+
+https://github.com/hughbagan/authentication-lab
